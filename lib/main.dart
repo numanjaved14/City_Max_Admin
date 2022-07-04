@@ -1,4 +1,3 @@
-import 'package:city_max_admin/bottom_pages/test.dart';
 import 'package:city_max_admin/splash/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
