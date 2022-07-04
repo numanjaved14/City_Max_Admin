@@ -1,8 +1,9 @@
-import 'package:city_max_admin/main/mainscreen.dart';
+import 'package:city_max_admin/database/auth.dart';
+import 'package:city_max_admin/providers/circularprogressindicatorvalue.dart';
+import 'package:city_max_admin/widgets/customdialog.dart';
 import 'package:city_max_admin/widgets/text_form_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 
 class Login_Screen extends StatefulWidget {
   const Login_Screen({Key? key}) : super(key: key);
@@ -58,21 +59,93 @@ class _Login_ScreenState extends State<Login_Screen> {
                    SizedBox(
                   height: 23,
                 ),
-                ElevatedButton(
-                     onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (builder) => MainScreen()));
-                     },
-                            
-                           style: ElevatedButton.styleFrom(
-                            shape: StadiumBorder(),
-                             primary:  Color(0xff0DC6DF),
+                Container(
+          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12.0),
+            child: Builder(builder: (context) {
+              return ElevatedButton(
+                onPressed: () async {
+                  if (emailController.text.isEmpty &&
+                      passController.text.isEmpty) {
+                    Customdialog()
+                        .showInSnackBar("Both Fields are Required", context);
+                  }
+                  else if(emailController.text.isEmpty) {
+                    Customdialog()
+                        .showInSnackBar("Email Field are Required", context);
+                  }
+                  else if (passController.text.isEmpty) {
+                    Customdialog()
+                        .showInSnackBar("Password Field are Required", context);
+                  }
+                  else if (passController.text.length<5) {
+                    Customdialog()
+                        .showInSnackBar("Password minimum 5 charaters", context);
+                  }
+                 else if (emailController.text !='citymax@gmail.com' &&
+                      passController.text!='123456') {
+                    Customdialog()
+                        .showInSnackBar("Email and password is wrong", context);
+                  }
+                  else if(emailController.text=='citymax@gmail.com' &&
+                      passController.text=='123456'){
+                  Customdialog.showDialogBox(context);
+                    Provider.of<CircularProgressProvider>(context,listen: false).setValue(true);
+                    Future.delayed(Duration(seconds: 0)).then((value) {
+                      AuthUtils().login(emailController.text,
+                          passController.text, context);
+                    });
+
+                  }
+                  else if (emailController.text !='citymax@gmail.com' ) {
+                    Customdialog()
+                        .showInSnackBar("Email is wrong", context);
+                  }
+                  else if (
+                      passController!='123456') {
+                    Customdialog()
+                        .showInSnackBar("Password is wrong", context);
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                    shape: StadiumBorder(),
+                  
+                  primary:  Color(0xff0DC6DF),
                              fixedSize: Size(300, 60)
-                           ),
-                            child:  Text('Login',style: TextStyle(color: Colors.white),),
-                           
-                          
-                          
-                  ),
+                ),
+                child:Provider.of<CircularProgressProvider>(context).getValue==true?Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    CircularProgressIndicator(
+                      color: Colors.black,
+                    ),
+                    SizedBox(width: 10,),
+                    Text(
+                      "Please wait...",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ):
+                Text(
+                  "Login",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+              );
+            }),
+          ),
+        ),
+         Provider.of<CircularProgressProvider>(context,listen: true).getValue==false? Center(
+            child: Text(
+          '',
+          style: TextStyle(fontSize: 18),
+        )):Text("jkjjh")
             ],
           
         ),
