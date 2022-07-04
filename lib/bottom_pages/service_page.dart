@@ -24,7 +24,7 @@ class _ServicePageState extends State<ServicePage> {
         title: Image.asset('assets/splash.png',height: 50,),
       ),
       floatingActionButton:FloatingActionButton(onPressed: (){
-        Navigator.push(context, MaterialPageRoute(builder: (builder) => AddService()));
+       Navigator.push(context, MaterialPageRoute(builder: (builder) => AddService()));
       },child: Icon(Icons.add),),
       body: SingleChildScrollView(
      child:Column(
