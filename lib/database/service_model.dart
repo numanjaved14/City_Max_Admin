@@ -6,6 +6,7 @@ class ServiceModel {
   String description;
   String price;
   String tax;
+  String? uuid;
 
   ServiceModel({
     required this.servicetype,
@@ -13,6 +14,7 @@ class ServiceModel {
     required this.description,
     required this.price,
     required this.tax,
+    required this.uuid,
   });
 
   Map<String, dynamic> toJson() => {
@@ -21,6 +23,7 @@ class ServiceModel {
         'description': description,
         'price': price,
         'tax': tax,
+        'uuid':uuid
       };
 
   static ServiceModel fromSnap(DocumentSnapshot snap) {
@@ -32,6 +35,8 @@ class ServiceModel {
       description: snapShot['description'],
       price: snapShot['price'],
       tax: snapShot['tax'],
+      uuid: snapShot['uuid']
+
     );
   }
 }

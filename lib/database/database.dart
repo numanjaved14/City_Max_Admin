@@ -23,18 +23,19 @@ class Database{
           serviceCategory.isNotEmpty ||
           serviceSubCategory.isNotEmpty) {
      
-
+  String servicId = Uuid().v1();
 
         ServiceModel serviceModel = ServiceModel(
           description: description,
           tax: vat,
           price: price,
           serviceSubCategory: serviceSubCategory,
-          servicetype: serviceCategory
+          servicetype: serviceCategory,
+          uuid: servicId
         
         );
 
-        String servicId = Uuid().v1();
+      
 
         _firebaseFirestore.collection('Services').doc(servicId).set(
               serviceModel.toJson(),
