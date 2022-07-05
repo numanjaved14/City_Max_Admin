@@ -13,19 +13,7 @@ class ServiceDetail extends StatefulWidget {
 }
 
 class _ServiceDetailState extends State<ServiceDetail> {
-   var items = [
-    'Carpets',
-    'Sofas',
-    'Matress Shampooing',
-  ];
-  var itemsArea = [
-    'Residential Area',
-    'Residential Appartment',
-    'Commercial',
-    'Residential Villa',
-  ];
-  String dropdownvalue = 'Carpets';
-  String dropdownvalue1 = 'Residential Appartment';
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +46,7 @@ class _ServiceDetailState extends State<ServiceDetail> {
               Container(
                   margin: EdgeInsets.only(left: 20),
                   child: Text(
-                    'Select Service Type',
+                    'Service Type',
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       color: Colors.black,
@@ -72,20 +60,18 @@ class _ServiceDetailState extends State<ServiceDetail> {
               ),
              Container(
                   margin: EdgeInsets.only(left: 20),
-                  child: Text(
-                    'Carpets',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 17,
-                      
-                    ),
-                  )),
+                  child:  Text(
+                               widget.snap['servicetype'] == null
+                                ? 'No Data Found'
+                                :widget.snap['servicetype'],
+                              style: TextStyle(color: Colors.black, fontSize: 15),
+                              textAlign: TextAlign.start,
+                            ),),
                 SizedBox(height: 20,),
               Container(
                   margin: EdgeInsets.only(left: 20,top: 10),
                   child: Text(
-                    'Select Area',
+                    'Service Sub Category',
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       color: Colors.black,
@@ -99,24 +85,58 @@ class _ServiceDetailState extends State<ServiceDetail> {
             Container(
                   margin: EdgeInsets.only(left: 20),
                   child: Text(
-                    'Residential Area',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 17,
-                    ),
-                  )),
+                               widget.snap['serviceSubCategory'] == null
+                                ? 'No Data Found'
+                                :widget.snap['serviceSubCategory'],
+                              style: TextStyle(color: Colors.black, fontSize: 15),
+                              textAlign: TextAlign.start,
+                            ),),
                 SizedBox(height: 20,),
                Container(
                   margin: EdgeInsets.only(left: 20,top: 10),
                   child: Text(
-                    'Time Slots',
+                    'Service Description',
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 17,
+                      fontWeight: FontWeight.w700
+
                     ),
                   )),
+                  SizedBox(height: 10,),
+                   Container(
+                  margin: EdgeInsets.only(left: 20),
+                  child:Text(
+                               widget.snap['description'] == null
+                                ? 'No Data Found'
+                                :widget.snap['description'],
+                              style: TextStyle(color: Colors.black, fontSize: 15),
+                              textAlign: TextAlign.start,
+                            ),),
+                  SizedBox(height: 20,),
+                   Container(
+                  margin: EdgeInsets.only(left: 20,top: 10),
+                  child: Text(
+                    'Service Tax',
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w700
+
+                    ),
+                  )),
+                  SizedBox(height: 10,),
+                   Container(
+                  margin: EdgeInsets.only(left: 20),
+                  child: Text(
+                               widget.snap['tax'] + "%" == null
+                                ? 'No Data Found'
+                                :widget.snap['tax'] + " %",
+                              style: TextStyle(color: Colors.black, fontSize: 15),
+                              textAlign: TextAlign.start,
+                            ),),
               // Container(
               //    margin: EdgeInsets.only(left: 15,right: 15),
               //   child: DateTimePicker(
@@ -159,14 +179,12 @@ class _ServiceDetailState extends State<ServiceDetail> {
                Container(
                   margin: EdgeInsets.only(left: 20),
                   child: Text(
-                    '123 \AED',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 17,
-                      
-                    ),
-                  )),
+                               widget.snap['price']  + " AED" == null
+                                ? 'No Data Found'
+                                :widget.snap['price'] + " AED",
+                              style: TextStyle(color: Colors.black, fontSize: 15),
+                              textAlign: TextAlign.start,
+                            ),),
                 SizedBox(height: 20,),
              
             ],
