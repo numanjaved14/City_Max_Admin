@@ -1,3 +1,4 @@
+import 'package:city_max_admin/eidt/service_edit.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -26,6 +27,14 @@ class _ServiceDetailState extends State<ServiceDetail> {
         
         centerTitle: true,
         title: Text('Service Detail',style: TextStyle(color: Colors.black),),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (builder) => ServiceEdit(snap: widget.snap,)));
+            }, icon: Icon(Icons.edit,color: Colors.blue,)),
+          )
+        ],
       ),
       body: SafeArea(
         child:  Column(
