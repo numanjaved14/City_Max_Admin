@@ -48,7 +48,7 @@ class _ServicePageState extends State<ServicePage> {
                           },
                             leading: const Text('Tuesday'),
                             
-                            trailing:  IconButton(
+                                                        trailing:  IconButton(
                               onPressed:(){},
                              icon: Icon(Icons.delete,color: Colors.red,),
                              
