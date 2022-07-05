@@ -1,8 +1,10 @@
 import 'package:city_max_admin/appointments/currentappointments.dart';
+import 'package:city_max_admin/auth/login_Screen.dart';
 import 'package:city_max_admin/bottom_pages/service_page.dart';
 import 'package:city_max_admin/bottom_pages/user_appointment_page.dart';
 import 'package:city_max_admin/bottom_pages/userlist.dart';
 import 'package:city_max_admin/review/reviews.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -28,7 +30,9 @@ class _MyHomePageState extends State<MyHomePage> {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                FirebaseAuth.instance.signOut().then((value) => Navigator.push(context, MaterialPageRoute(builder: (builder) => Login_Screen())));
+              },
               icon: Icon(
                 Icons.logout,
                 color: Colors.blue,
