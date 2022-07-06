@@ -34,7 +34,7 @@ class _ServicePageState extends State<ServicePage> {
       body: SingleChildScrollView(
      child:
             Container(
-              height: MediaQuery.of(context).size.height,
+              height: 680,
               child:   StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection("Services")                         

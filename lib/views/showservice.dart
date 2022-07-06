@@ -19,36 +19,37 @@ class _ShowServiceState extends State<ShowService> {
   @override
   Widget build(BuildContext context) {
     return    
-     Container(
-      margin: EdgeInsets.only(left: 10,right: 10),
-       child: Card(
-        elevation: 10,
-         shape: BeveledRectangleBorder(
-    borderRadius: BorderRadius.circular(10.0),
-  ),
-         child: ListTile(
-           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (builder) => ServiceDetail(snap: widget.snap,)));
-           },
-                            
-                            title: Text(
-                               widget.snap['servicetype'] == null
-                                ? 'No Data Found'
-                                :widget.snap['servicetype'],
-                              style: TextStyle(color: Colors.black, fontSize: 15),
-                              textAlign: TextAlign.start,
+    Container(
+        margin: EdgeInsets.only(left: 10,right: 10),
+         child: Card(
+          elevation: 10,
+           shape: BeveledRectangleBorder(
+         borderRadius: BorderRadius.circular(10.0),
+       ),
+           child: ListTile(
+             onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (builder) => ServiceDetail(snap: widget.snap,)));
+             },
+                              
+                              title: Text(
+                                 widget.snap['servicetype'] == null
+                                  ? 'No Data Found'
+                                  :widget.snap['servicetype'],
+                                style: TextStyle(color: Colors.black, fontSize: 15),
+                                textAlign: TextAlign.start,
+                              ),
+                              subtitle: Text(
+                                widget.snap['serviceSubCategory'] == null
+                                  ? 'No Data Found'
+                                  :widget.snap['serviceSubCategory'],
+                                style: TextStyle(color: Colors.black, fontSize: 15),
+                                textAlign: TextAlign.start,
+                              ),
+                              trailing:  IconButton(onPressed: (){
+                                 _delete(context);
+                              }, icon: Icon(Icons.delete,color: Colors.red,))
                             ),
-                            subtitle: Text(
-                              widget.snap['serviceSubCategory'] == null
-                                ? 'No Data Found'
-                                :widget.snap['serviceSubCategory'],
-                              style: TextStyle(color: Colors.black, fontSize: 15),
-                              textAlign: TextAlign.start,
-                            ),
-                            trailing:  IconButton(onPressed: (){
-                               _delete(context);
-                            }, icon: Icon(Icons.delete,color: Colors.red,))
-                          ),
+         
        ),
      );
   }
