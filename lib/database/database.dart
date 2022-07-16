@@ -3,10 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
 
-class Database{
+class Database {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
-  
   //Add Service
   Future<String> addService({
     required String price,
@@ -14,6 +13,7 @@ class Database{
     required String vat,
     required serviceCategory,
     required serviceSubCategory,
+    required serviceSuperSubCategory,
   }) async {
     String res = 'Some error occured.';
     try {
@@ -21,21 +21,19 @@ class Database{
           description.isNotEmpty ||
           vat.isNotEmpty ||
           serviceCategory.isNotEmpty ||
-          serviceSubCategory.isNotEmpty) {
-     
-  String servicId = Uuid().v1();
+          serviceSubCategory.isNotEmpty ||
+          serviceSuperSubCategory.isNotEmpty) {
+        String servicId = Uuid().v1();
 
         ServiceModel serviceModel = ServiceModel(
           description: description,
           tax: vat,
           price: price,
-          serviceSubCategory: serviceSubCategory,
+          serviceCategory: serviceSubCategory,
           servicetype: serviceCategory,
-          uuid: servicId
-        
+          uuid: servicId,
+          serviceSubCategory: serviceSuperSubCategory,
         );
-
-      
 
         _firebaseFirestore.collection('Services').doc(servicId).set(
               serviceModel.toJson(),
@@ -49,12 +47,14 @@ class Database{
   }
 
   //Update
-   Future<String> updateService({
+  Future<String> updateService({
     required String price,
     required String description,
     required String vat,
+    required String serviceSuperSubCategory,
     required serviceCategory,
     required serviceSubCategory,
+    required uuid,
   }) async {
     String res = 'Some error occured.';
     try {
@@ -62,28 +62,23 @@ class Database{
           description.isNotEmpty ||
           vat.isNotEmpty ||
           serviceCategory.isNotEmpty ||
-          serviceSubCategory.isNotEmpty) {
-     
-  String servicId = Uuid().v1();
+          serviceSubCategory.isNotEmpty ||
+          serviceSuperSubCategory.isNotEmpty) {
+        // String servicId = Uuid().v1();
 
         ServiceModel serviceModel = ServiceModel(
-          description: description,
-          tax: vat,
-          price: price,
-          serviceSubCategory: serviceSubCategory,
-          servicetype: serviceCategory,
-          uuid: servicId
-        
-        );
+            description: description,
+            tax: vat,
+            price: price,
+            serviceSubCategory: serviceSuperSubCategory,
+            serviceCategory: serviceSubCategory,
+            servicetype: serviceCategory,
+            uuid: uuid);
 
-      
-
-        _firebaseFirestore.collection('Services').doc(servicId).update({
-            "tax" :  vat
-
-        }
-             
-            );
+        _firebaseFirestore
+            .collection('Services')
+            .doc(uuid)
+            .update({"tax": vat});
         res = 'Success';
       }
     } catch (error) {
@@ -91,6 +86,4 @@ class Database{
     }
     return res;
   }
-
-
 }

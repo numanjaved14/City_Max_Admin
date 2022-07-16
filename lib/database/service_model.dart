@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ServiceModel {
   var servicetype;
   var serviceSubCategory;
+  var serviceCategory;
   String description;
   String price;
   String tax;
@@ -15,6 +16,7 @@ class ServiceModel {
     required this.price,
     required this.tax,
     required this.uuid,
+    required this.serviceCategory,
   });
 
   Map<String, dynamic> toJson() => {
@@ -23,7 +25,8 @@ class ServiceModel {
         'description': description,
         'price': price,
         'tax': tax,
-        'uuid':uuid
+        'uuid': uuid,
+        'serviceCategory': serviceCategory,
       };
 
   static ServiceModel fromSnap(DocumentSnapshot snap) {
@@ -35,8 +38,8 @@ class ServiceModel {
       description: snapShot['description'],
       price: snapShot['price'],
       tax: snapShot['tax'],
-      uuid: snapShot['uuid']
-
+      uuid: snapShot['uuid'],
+      serviceCategory: snapShot['serviceCategory'],
     );
   }
 }
