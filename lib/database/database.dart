@@ -14,6 +14,7 @@ class Database {
     required serviceCategory,
     required serviceSubCategory,
     required serviceSuperSubCategory,
+    required discount,
   }) async {
     String res = 'Some error occured.';
     try {
@@ -33,6 +34,7 @@ class Database {
           servicetype: serviceCategory,
           uuid: servicId,
           serviceSubCategory: serviceSuperSubCategory,
+          discount: discount,
         );
 
         _firebaseFirestore.collection('Services').doc(servicId).set(
@@ -54,6 +56,7 @@ class Database {
     required String serviceSuperSubCategory,
     required serviceCategory,
     required serviceSubCategory,
+    required discount,
     required uuid,
   }) async {
     String res = 'Some error occured.';
@@ -67,18 +70,19 @@ class Database {
         // String servicId = Uuid().v1();
 
         ServiceModel serviceModel = ServiceModel(
-            description: description,
-            tax: vat,
-            price: price,
-            serviceSubCategory: serviceSuperSubCategory,
-            serviceCategory: serviceSubCategory,
-            servicetype: serviceCategory,
-            uuid: uuid);
+          description: description,
+          tax: vat,
+          price: price,
+          serviceSubCategory: serviceSuperSubCategory,
+          serviceCategory: serviceSubCategory,
+          servicetype: serviceCategory,
+          uuid: uuid,
+          discount: discount,
+        );
 
-        _firebaseFirestore
-            .collection('Services')
-            .doc(uuid)
-            .update({"tax": vat});
+        _firebaseFirestore.collection('Services').doc(uuid).update(
+              serviceModel.toJson(),
+            );
         res = 'Success';
       }
     } catch (error) {

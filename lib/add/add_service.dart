@@ -11,6 +11,17 @@ class AddService extends StatefulWidget {
 }
 
 class _AddServiceState extends State<AddService> {
+  @override
+  void dispose() {
+    servicCateoryController.dispose();
+    serviceSubCateoryController.dispose();
+    descriptionController.dispose();
+    priceController.dispose();
+    vatController.dispose();
+    discountController.dispose();
+    super.dispose();
+  }
+
   var serviceCategory = [
     'Cleaning',
     'Long-lasting Distintion',
@@ -450,9 +461,7 @@ class _AddServiceState extends State<AddService> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+
               Container(
                   margin: EdgeInsets.only(left: 20),
                   child: Text(
@@ -478,6 +487,33 @@ class _AddServiceState extends State<AddService> {
                       ),
                       border: OutlineInputBorder(),
                       hintText: 'Enter Service Price',
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                  margin: EdgeInsets.only(left: 20),
+                  child: Text(
+                    'Discount',
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 17,
+                    ),
+                  )),
+              Container(
+                margin: EdgeInsets.only(left: 15, right: 15),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  child: TextField(
+                    controller: discountController,
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter Service Discount',
                     ),
                   ),
                 ),
@@ -517,7 +553,6 @@ class _AddServiceState extends State<AddService> {
               SizedBox(
                 height: 20,
               ),
-
               Center(
                 child: ElevatedButton(
                   onPressed: () {
@@ -552,15 +587,17 @@ class _AddServiceState extends State<AddService> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController vatController = TextEditingController();
+  TextEditingController discountController = TextEditingController();
+
   void addServices() async {
     String res = await Database().addService(
-      description: descriptionController.text,
-      price: priceController.text,
-      vat: vatController.text,
-      serviceCategory: _make,
-      serviceSubCategory: _model,
-      serviceSuperSubCategory: _subCat,
-    );
+        description: descriptionController.text,
+        price: priceController.text,
+        vat: vatController.text,
+        serviceCategory: _make,
+        serviceSubCategory: _model,
+        serviceSuperSubCategory: _subCat,
+        discount: discountController.text);
 
     if (res == 'Success') {
       Navigator.of(context).push(

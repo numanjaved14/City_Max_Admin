@@ -18,6 +18,18 @@ class _ServiceEditState extends State<ServiceEdit> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController vatController = TextEditingController();
+  TextEditingController discountController = TextEditingController();
+
+  @override
+  void dispose() {
+    servicCateoryController.dispose();
+    serviceSubCateoryController.dispose();
+    descriptionController.dispose();
+    priceController.dispose();
+    vatController.dispose();
+    discountController.dispose();
+    super.dispose();
+  }
 
   var serviceCategory = [
     'Cleaning',
@@ -458,16 +470,12 @@ class _ServiceEditState extends State<ServiceEdit> {
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      hintText: widget.snap['description'] == null
-                          ? 'No Data Found'
-                          : widget.snap['description'],
+                      hintText: 'Enter Service Description',
                     ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+
               Container(
                   margin: EdgeInsets.only(left: 20),
                   child: Text(
@@ -492,9 +500,34 @@ class _ServiceEditState extends State<ServiceEdit> {
                         textAlign: TextAlign.center,
                       ),
                       border: OutlineInputBorder(),
-                      hintText: widget.snap['price'] == null
-                          ? 'No Data Found'
-                          : widget.snap['price'],
+                      hintText: 'Enter Service Price',
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                  margin: EdgeInsets.only(left: 20),
+                  child: Text(
+                    'Discount',
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 17,
+                    ),
+                  )),
+              Container(
+                margin: EdgeInsets.only(left: 15, right: 15),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  child: TextField(
+                    controller: discountController,
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter Service Discount',
                     ),
                   ),
                 ),
@@ -526,9 +559,7 @@ class _ServiceEditState extends State<ServiceEdit> {
                         textAlign: TextAlign.center,
                       ),
                       border: OutlineInputBorder(),
-                      hintText: widget.snap['tax'] == null
-                          ? 'No Data Found'
-                          : widget.snap['tax'],
+                      hintText: 'Enter VAT',
                     ),
                   ),
                 ),
@@ -573,6 +604,7 @@ class _ServiceEditState extends State<ServiceEdit> {
       serviceSubCategory: _model,
       serviceSuperSubCategory: _subCat!,
       uuid: widget.snap['uuid'],
+      discount: discountController.text,
     );
 
     if (res == 'Success') {
@@ -592,5 +624,12 @@ class _ServiceEditState extends State<ServiceEdit> {
     _make = widget.snap['servicetype'];
     _model = widget.snap['serviceCategory'];
     _subCat = widget.snap['serviceSubCategory'];
+    descriptionController.text =
+        widget.snap['description'] == null ? null : widget.snap['description'];
+    priceController.text =
+        widget.snap['price'] == null ? null : widget.snap['price'];
+    vatController.text = widget.snap['tax'] == null ? null : widget.snap['tax'];
+    discountController.text =
+        widget.snap['discount'] == null ? null : widget.snap['discount'];
   }
 }
