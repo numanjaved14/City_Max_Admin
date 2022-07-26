@@ -1,7 +1,5 @@
 import 'package:city_max_admin/appointments/currentappointments.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../appointments/pastappointments.dart';
 
@@ -25,26 +23,19 @@ class _UserAppointmentPageState extends State<UserAppointmentPage> {
           bottom: const TabBar(
             labelPadding: EdgeInsets.all(12),
             tabs: <Widget>[
-              
               Tab(
-                
                 text: 'Current Appointments',
-                
               ),
               Tab(
-                 text: 'Past Appointments',
+                text: 'Past Appointments',
               ),
-             
             ],
           ),
         ),
-        body:  TabBarView(
+        body: TabBarView(
           children: <Widget>[
             CurrentAppointments(),
-            
-             PastAppointments(),
-            
-          
+            PastApointment(),
           ],
         ),
       ),

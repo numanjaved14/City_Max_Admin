@@ -1,4 +1,5 @@
 import 'package:city_max_admin/appointments/currentappointments.dart';
+import 'package:city_max_admin/appointments/pastappointments.dart';
 import 'package:city_max_admin/auth/login_Screen.dart';
 import 'package:city_max_admin/bottom_pages/service_page.dart';
 import 'package:city_max_admin/bottom_pages/user_appointment_page.dart';
@@ -31,7 +32,9 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           IconButton(
               onPressed: () {
-                FirebaseAuth.instance.signOut().then((value) => Navigator.push(context, MaterialPageRoute(builder: (builder) => Login_Screen())));
+                FirebaseAuth.instance.signOut().then((value) => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (builder) => Login_Screen())));
               },
               icon: Icon(
                 Icons.logout,
@@ -47,8 +50,9 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InkWell(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (builder) => ServicePage()));
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (builder) => ServicePage()));
                 },
                 child: Container(
                   width: 150,
@@ -85,9 +89,11 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               // ignore: sized_box_for_whitespace
               InkWell(
-                onTap: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (builder) => UserAppointmentPage()));
-
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (builder) => UserAppointmentPage()));
                 },
                 child: Container(
                   width: 150,
@@ -121,14 +127,18 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             ],
           ),
-          SizedBox(height: 15,),
-           Row(
+          SizedBox(
+            height: 15,
+          ),
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InkWell(
-                onTap: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (builder) => Reviews()));
-
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (builder) => PastApointment()));
                 },
                 child: Container(
                   width: 150,
@@ -164,9 +174,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 width: 20,
               ),
               InkWell(
-                onTap: (){
-                                                      Navigator.push(context, MaterialPageRoute(builder: (builder) => UserList()));
-
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (builder) => UserList()));
                 },
                 child: Container(
                   width: 150,

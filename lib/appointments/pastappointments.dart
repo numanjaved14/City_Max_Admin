@@ -2,97 +2,137 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../details/currentappointmentdetails.dart';
-
-class PastAppointments extends StatefulWidget {
-  const PastAppointments({Key? key}) : super(key: key);
+class PastApointment extends StatefulWidget {
+  const PastApointment({Key? key}) : super(key: key);
 
   @override
-  State<PastAppointments> createState() => _PastAppointmentsState();
+  State<PastApointment> createState() => _PastApointmentState();
 }
 
-class _PastAppointmentsState extends State<PastAppointments> {
+class _PastApointmentState extends State<PastApointment> {
+  TextEditingController _reviewController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: FirebaseAuth.instance.currentUser != null
-            ? StreamBuilder(
-                stream: FirebaseFirestore.instance
-                    .collection('orders')
-                    .where(
-                      'status',
-                      isNotEqualTo: 'pending',
-                    )
-                    .snapshots(),
-                builder: (context,
-                    AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                        snapshot) {
-                  if (snapshot.hasError) {
-                    return const Center(
-                      child: Text('Something went wrong'),
-                    );
-                  }
-                  if (snapshot.hasData) {
-                    return Column(
-                      children: [
-                        // Padding(
-                        //   padding: const EdgeInsets.all(8.0),
-                        //   child: Text(
-                        //     '29 Decemeber 2002',
-                        //     textAlign: TextAlign.start,
-                        //     style:
-                        //         TextStyle(color: Colors.black, fontWeight: FontWeight.w900),
-                        //   ),
-                        // ),
-                        Container(
-                          height: MediaQuery.of(context).size.height,
-                          child: ListView.builder(
-                              itemCount: snapshot.data!.docs.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                Map<String, dynamic> snap =
-                                    snapshot.data!.docs[index].data()
-                                        as Map<String, dynamic>;
-                                return Column(
-                                  children: [
-                                    ListTile(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (builder) =>
-                                                AppointCurrentDetail(),
+          child: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection('orders')
+                  // .where(
+                  //   'status',
+                  //   isNotEqualTo: 'pending',
+                  // )
+
+                  .snapshots(),
+              builder: (context,
+                  AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+                if (snapshot.hasError) {
+                  return const Center(
+                    child: Text('Something went wrong'),
+                  );
+                }
+                if (snapshot.hasData) {
+                  return Column(
+                    children: [
+                      // Padding(
+                      //   padding: const EdgeInsets.all(8.0),
+                      //   child: Text(
+                      //     '29 Decemeber 2002',
+                      //     textAlign: TextAlign.start,
+                      //     style:
+                      //         TextStyle(color: Colors.black, fontWeight: FontWeight.w900),
+                      //   ),
+                      // ),
+                      Container(
+                        height: MediaQuery.of(context).size.height,
+                        child: ListView.builder(
+                            itemCount: snapshot.data!.docs.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              Map<String, dynamic> snap =
+                                  snapshot.data!.docs[index].data()
+                                      as Map<String, dynamic>;
+                              return Column(
+                                children: [
+                                  ListTile(
+                                    onTap: () {
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (builder) =>
+                                      //         AppointCurrentDetail(),
+                                      //   ),
+                                      // );
+                                    },
+                                    leading: Text(snap['date']),
+                                    trailing: snap['status'] == 'pending'
+                                        ? Text('Not Completed')
+                                        : TextButton(
+                                            onPressed: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return Dialog(
+                                                      shape: RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  20.0)), //this right here
+                                                      child: Container(
+                                                        height: 200,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(12.0),
+                                                          child: Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Center(
+                                                                child: snap['reviw'] ==
+                                                                        ''
+                                                                    ? Text(
+                                                                        'No Review')
+                                                                    : Text(
+                                                                        snap[
+                                                                            'review'],
+                                                                      ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  });
+                                            },
+                                            child: Text(
+                                              'Review',
+                                              style:
+                                                  TextStyle(color: Colors.red),
+                                            ),
                                           ),
-                                        );
-                                      },
-                                      leading: Text(snap['date']),
-                                      trailing: TextButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          'Cancel',
-                                          style: TextStyle(color: Colors.red),
-                                        ),
-                                      ),
-                                      title: Text(snap['serviceType']),
-                                      subtitle: Text(snap['serviceCatgory']),
+                                    title: Text(
+                                      'Order id: ${snap['uuid'].toString().substring(0, 7)}',
                                     ),
-                                    Divider()
-                                  ],
-                                );
-                              }),
-                        ),
-                      ],
-                    );
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    );
-                  }
-                })
-            : const Center(
-                child: Text('Please Register First'),
-              ),
-      ),
+                                    subtitle:
+                                        Text('Price: ${snap['price']} AED'),
+                                  ),
+                                  Divider()
+                                ],
+                              );
+                            }),
+                      ),
+                    ],
+                  );
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  );
+                }
+              })),
     );
   }
 }
