@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'apointment_details.dart';
 
 class PastApointment extends StatefulWidget {
   const PastApointment({Key? key}) : super(key: key);
@@ -55,13 +56,13 @@ class _PastApointmentState extends State<PastApointment> {
                                 children: [
                                   ListTile(
                                     onTap: () {
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (builder) =>
-                                      //         AppointCurrentDetail(),
-                                      //   ),
-                                      // );
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (builder) =>
+                                              ApointmentDetails(snap: snap),
+                                        ),
+                                      );
                                     },
                                     leading: Text(snap['date']),
                                     trailing: snap['status'] == 'pending'
@@ -115,7 +116,7 @@ class _PastApointmentState extends State<PastApointment> {
                                             ),
                                           ),
                                     title: Text(
-                                      'Order id: ${snap['uuid'].toString().substring(0, 7)}',
+                                      'Location: ${snap['loc'].toString().substring(0, 7)}',
                                     ),
                                     subtitle:
                                         Text('Price: ${snap['price']} AED'),

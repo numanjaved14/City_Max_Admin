@@ -20,6 +20,8 @@ class _ServiceEditState extends State<ServiceEdit> {
   TextEditingController vatController = TextEditingController();
   TextEditingController discountController = TextEditingController();
 
+  bool _loading = false;
+
   @override
   void dispose() {
     servicCateoryController.dispose();
@@ -571,21 +573,29 @@ class _ServiceEditState extends State<ServiceEdit> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
+                    setState(() {
+                      _loading = true;
+                    });
                     update();
-                    Toast.show("Data Is Added",
-                        duration: Toast.lengthShort, gravity: Toast.bottom);
+                    // Toast.show("Data Is Added",
+                    //     duration: Toast.lengthShort, gravity: Toast.bottom);
                   },
                   style: ElevatedButton.styleFrom(
-                      shape: StadiumBorder(),
-                      primary: Color(0xff0DC6DF),
-                      fixedSize: Size(300, 60)),
-                  child: Text(
-                    'UpDate',
-                    style: TextStyle(color: Colors.white),
+                    shape: const StadiumBorder(),
+                    primary: const Color(0xff0DC6DF),
+                    fixedSize: const Size(300, 60),
                   ),
+                  child: _loading
+                      ? const Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        )
+                      : const Text(
+                          'UpDate',
+                          style: TextStyle(color: Colors.white),
+                        ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
             ],

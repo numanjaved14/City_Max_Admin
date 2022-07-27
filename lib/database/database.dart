@@ -90,4 +90,22 @@ class Database {
     }
     return res;
   }
+
+  //Mark Order as Complete
+  Future<String> orderComplete({
+    required uuid,
+  }) async {
+    String res = 'Some error occured.';
+    try {
+      if (uuid.isNotEmpty) {
+        _firebaseFirestore.collection('orders').doc(uuid).update({
+          'status': 'compete',
+        });
+        res = 'Success';
+      }
+    } catch (error) {
+      res = error.toString();
+    }
+    return res;
+  }
 }

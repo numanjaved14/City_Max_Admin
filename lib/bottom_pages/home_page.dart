@@ -175,8 +175,10 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (builder) => UserList()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (builder) => NotificationScreen()));
                 },
                 child: Container(
                   width: 150,

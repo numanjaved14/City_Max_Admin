@@ -1,6 +1,7 @@
+import 'package:city_max_admin/appointments/apointment_details.dart';
+import 'package:city_max_admin/database/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class CurrentAppointments extends StatefulWidget {
   const CurrentAppointments({Key? key}) : super(key: key);
@@ -58,21 +59,24 @@ class _CurrentAppointmentsState extends State<CurrentAppointments> {
                               children: [
                                 ListTile(
                                   onTap: () {
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //     builder: (builder) =>
-                                    //         AppointCurrentDetail(),
-                                    //   ),
-                                    // );
-                                  },
-                                  leading: Text(snap['date']),
-                                  title: Column(
-                                    children: [
-                                      Text(
-                                        'Order id: ${snap['uuid'].toString().substring(0, 7)}',
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (builder) =>
+                                            ApointmentDetails(snap: snap),
                                       ),
-                                    ],
+                                    );
+                                  },
+                                  trailing: IconButton(
+                                    onPressed: () async {
+                                      await Database()
+                                          .orderComplete(uuid: snap['uuid']);
+                                    },
+                                    icon: const Icon(Icons.check),
+                                  ),
+                                  leading: Text(snap['date']),
+                                  title: Text(
+                                    'Location: ${snap['loc'].toString().substring(0, 7)}',
                                   ),
                                   subtitle: Text('Price: ${snap['price']} AED'),
                                 ),
