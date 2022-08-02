@@ -24,10 +24,10 @@ class _AddServiceState extends State<AddService> {
 
   var serviceCategory = [
     'Cleaning',
-    'Long-lasting Distintion',
+    'Long-Lasting Disinfection',
     'Commercial Disinfection',
     'Deep Cleaning',
-    'Resdential Area'
+    'Residential Area'
   ];
 
   var cleaningSubCaterogy = [
