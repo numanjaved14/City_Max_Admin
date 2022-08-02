@@ -217,30 +217,30 @@ class _ServiceDetailState extends State<ServiceDetail> {
                 textAlign: TextAlign.start,
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 20),
-              child: Text(
-                'Pay Via',
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 20),
-              child: Text(
-                widget.snap['payVia'] == null
-                    ? 'No Data Found'
-                    : widget.snap['price'],
-                style: TextStyle(color: Colors.black, fontSize: 15),
-                textAlign: TextAlign.start,
-              ),
-            ),
+            // SizedBox(
+            //   height: 20,
+            // ),
+            // Container(
+            //   margin: EdgeInsets.only(left: 20),
+            //   child: Text(
+            //     'Pay Via',
+            //     textAlign: TextAlign.right,
+            //     style: TextStyle(
+            //         color: Colors.black,
+            //         fontSize: 17,
+            //         fontWeight: FontWeight.w700),
+            //   ),
+            // ),
+            // Container(
+            //   margin: EdgeInsets.only(left: 20),
+            //   child: Text(
+            //     widget.snap['payVia'] == null
+            //         ? 'No Data Found'
+            //         : widget.snap['price'],
+            //     style: TextStyle(color: Colors.black, fontSize: 15),
+            //     textAlign: TextAlign.start,
+            //   ),
+            // ),
           ],
         ),
       ),
