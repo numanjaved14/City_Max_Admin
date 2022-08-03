@@ -50,10 +50,7 @@ class _AddServiceState extends State<AddService> {
     'Villas',
   ];
 
-  var commercialSubCategory = [
-    'Small Space',
-    'Medium Space',
-  ];
+  var commercialSubCategory = ['SmallSpace', 'Medium Space', 'Large Space'];
 
   var serviceSubCategoryDeep = [
     'Appartments',
