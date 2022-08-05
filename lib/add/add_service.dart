@@ -24,10 +24,10 @@ class _AddServiceState extends State<AddService> {
 
   var serviceCategory = [
     'Cleaning',
-    'Long-Lasting Disinfection',
+    'Long-lasting Distintion',
     'Commercial Disinfection',
     'Deep Cleaning',
-    'Residential Area'
+    'Resdential Area'
   ];
 
   var cleaningSubCaterogy = [
@@ -50,7 +50,10 @@ class _AddServiceState extends State<AddService> {
     'Villas',
   ];
 
-  var commercialSubCategory = ['SmallSpace', 'Medium Space', 'Large Space'];
+  var commercialSubCategory = [
+    'Small Space',
+    'Medium Space',
+  ];
 
   var serviceSubCategoryDeep = [
     'Appartments',
