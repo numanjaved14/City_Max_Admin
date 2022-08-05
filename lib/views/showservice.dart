@@ -12,6 +12,7 @@ class ShowService extends StatefulWidget {
 
 class _ShowServiceState extends State<ShowService> {
   bool _isShown = true;
+  bool isMount = true;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,10 @@ class _ShowServiceState extends State<ShowService> {
           ),
           trailing: IconButton(
             onPressed: () {
-              _delete(context);
+              FirebaseFirestore.instance
+                  .collection("Services")
+                  .doc(widget.snap['uuid'])
+                  .delete();
             },
             icon: const Icon(
               Icons.delete,
@@ -57,46 +61,6 @@ class _ShowServiceState extends State<ShowService> {
           ),
         ),
       ),
-    );
-  }
-
-  void _delete(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext ctx) {
-        return AlertDialog(
-          title: const Text('Please Confirm'),
-          content: const Text(
-            'Are you sure to remove the service',
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
-          ),
-          actions: [
-            // The "Yes" button
-            TextButton(
-              onPressed: () {
-                // Remove the box
-                setState(() {
-                  FirebaseFirestore.instance
-                      .collection("Services")
-                      .doc(widget.snap['uuid'])
-                      .delete();
-                });
-
-                // Close the dialog
-                Navigator.of(context).pop();
-              },
-              child: const Text('Yes'),
-            ),
-            TextButton(
-              onPressed: () {
-                // Close the dialog
-                Navigator.of(context).pop();
-              },
-              child: const Text('No'),
-            ),
-          ],
-        );
-      },
     );
   }
 }

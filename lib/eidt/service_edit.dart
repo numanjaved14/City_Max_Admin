@@ -35,10 +35,10 @@ class _ServiceEditState extends State<ServiceEdit> {
 
   var serviceCategory = [
     'Cleaning',
-    'Long-lasting Distintion',
+    'Long-Lasting Disinfection',
     'Commercial Disinfection',
     'Deep Cleaning',
-    'Resdential Area'
+    'Residential Area'
   ];
 
   var cleaningSubCaterogy = [
@@ -526,7 +526,7 @@ class _ServiceEditState extends State<ServiceEdit> {
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                   child: TextField(
                     controller: discountController,
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Enter Service Discount',

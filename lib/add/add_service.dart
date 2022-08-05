@@ -24,10 +24,10 @@ class _AddServiceState extends State<AddService> {
 
   var serviceCategory = [
     'Cleaning',
-    'Long-lasting Distintion',
+    'Long-Lasting Disinfection',
     'Commercial Disinfection',
     'Deep Cleaning',
-    'Resdential Area'
+    'Residential Area'
   ];
 
   var cleaningSubCaterogy = [
@@ -50,10 +50,7 @@ class _AddServiceState extends State<AddService> {
     'Villas',
   ];
 
-  var commercialSubCategory = [
-    'Small Space',
-    'Medium Space',
-  ];
+  var commercialSubCategory = ['Small Space', 'Medium Space', 'Large Space'];
 
   var serviceSubCategoryDeep = [
     'Appartments',
@@ -142,6 +139,13 @@ class _AddServiceState extends State<AddService> {
     '400-500 SQM',
   ];
 
+  var serviceSuperSubCategoryCDLargeSpace = [
+    '1100-1200 SQM',
+    '1200-1300 SQM',
+    '1300-1400 SQM',
+    '1400-1500 SQM',
+  ];
+
   var serviceSuperSubCategoryCDMediumSpace = [
     '500-600 SQM',
     '600-700 SQM',
@@ -221,29 +225,32 @@ class _AddServiceState extends State<AddService> {
                                                     commercialSubCategory[1]
                                                 ? serviceSuperSubCategoryCDMediumSpace
                                                 : modelName ==
-                                                        serviceSubCategoryDeep[
-                                                            0]
-                                                    ? serviceSuperSubCategoryDCApart
+                                                        commercialSubCategory[2]
+                                                    ? serviceSuperSubCategoryCDLargeSpace
                                                     : modelName ==
                                                             serviceSubCategoryDeep[
-                                                                1]
-                                                        ? serviceSuperSubCategoryDCVilla
+                                                                0]
+                                                        ? serviceSuperSubCategoryDCApart
                                                         : modelName ==
                                                                 serviceSubCategoryDeep[
-                                                                    2]
-                                                            ? serviceSuperSubCategoryDCKitchen
+                                                                    1]
+                                                            ? serviceSuperSubCategoryDCVilla
                                                             : modelName ==
                                                                     serviceSubCategoryDeep[
-                                                                        3]
-                                                                ? serviceSuperSubCategoryDCBath
+                                                                        2]
+                                                                ? serviceSuperSubCategoryDCKitchen
                                                                 : modelName ==
-                                                                        serviceSubCategoryResdentialArea[
-                                                                            0]
-                                                                    ? serviceSuperSubCategoryRAApart
+                                                                        serviceSubCategoryDeep[
+                                                                            3]
+                                                                    ? serviceSuperSubCategoryDCBath
                                                                     : modelName ==
-                                                                            serviceSubCategoryResdentialArea[1]
-                                                                        ? serviceSuperSubCategoryRAVila
-                                                                        : serviceEmpty;
+                                                                            serviceSubCategoryResdentialArea[
+                                                                                0]
+                                                                        ? serviceSuperSubCategoryRAApart
+                                                                        : modelName ==
+                                                                                serviceSubCategoryResdentialArea[1]
+                                                                            ? serviceSuperSubCategoryRAVila
+                                                                            : serviceEmpty;
   }
 
   String dropdownvalue = 'Cleaning';
@@ -510,7 +517,7 @@ class _AddServiceState extends State<AddService> {
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                   child: TextField(
                     controller: discountController,
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Enter Service Discount',
@@ -557,8 +564,6 @@ class _AddServiceState extends State<AddService> {
                 child: ElevatedButton(
                   onPressed: () {
                     addServices();
-                    Toast.show("Data Is Added",
-                        duration: Toast.lengthShort, gravity: Toast.bottom);
                   },
                   style: ElevatedButton.styleFrom(
                       shape: StadiumBorder(),
@@ -600,11 +605,7 @@ class _AddServiceState extends State<AddService> {
         discount: discountController.text);
 
     if (res == 'Success') {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => MainScreen(),
-        ),
-      );
+      Navigator.pop(context);
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(res)),

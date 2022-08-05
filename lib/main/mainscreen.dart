@@ -23,13 +23,12 @@ class _MainScreenState extends State<MainScreen> {
     UserAppointmentPage(),
     NotificationScreen(),
   ]; // to store nested tabs
-  final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = MyHomePage(); // Our first view in viewport
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: PersistentTabView(
+      controller: _controller,
       screens: screens,
       backgroundColor: Colors.white, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
@@ -56,7 +55,6 @@ class _MainScreenState extends State<MainScreen> {
         duration: Duration(milliseconds: 200),
       ),
       context,
-      controller: _controller,
       // items: [],
       items: [
         PersistentBottomNavBarItem(
