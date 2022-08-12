@@ -4,6 +4,7 @@ import 'package:city_max_admin/bottom_pages/home_page.dart';
 import 'package:city_max_admin/bottom_pages/service_page.dart';
 import 'package:city_max_admin/bottom_pages/user_appointment_page.dart';
 import 'package:city_max_admin/bottom_pages/userlist.dart';
+import 'package:city_max_admin/discount/discount_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
@@ -22,6 +23,7 @@ class _MainScreenState extends State<MainScreen> {
     ServicePage(),
     UserAppointmentPage(),
     NotificationScreen(),
+    DiscountScreen(),
   ]; // to store nested tabs
 
   @override
@@ -94,6 +96,16 @@ class _MainScreenState extends State<MainScreen> {
             width: 30,
           ),
           title: ("Notification"),
+          activeColorPrimary: Color(0xff0DC6DF),
+          inactiveColorPrimary: Color(0xff8d8282),
+        ),
+        PersistentBottomNavBarItem(
+          icon: Image.asset(
+            'assets/discount.png',
+            height: 30,
+            width: 30,
+          ),
+          title: ("Discount"),
           activeColorPrimary: Color(0xff0DC6DF),
           inactiveColorPrimary: Color(0xff8d8282),
         ),

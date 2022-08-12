@@ -108,4 +108,50 @@ class Database {
     }
     return res;
   }
+
+  //Add Discount
+  Future<String> addDiscount({
+    required serviceCategory,
+    required serviceSubCategory,
+    required int discount,
+  }) async {
+    String res = 'Some error occured.';
+    try {
+      if (serviceCategory.isNotEmpty ||
+          serviceSubCategory.isNotEmpty ||
+          discount != null) {
+        String discountId = Uuid().v1();
+
+        _firebaseFirestore.collection('discount').doc(discountId).set({
+          'serviceCategory': serviceSubCategory,
+          'servicetype': serviceCategory,
+          'uuid': discountId,
+          'discount': discount,
+        });
+        res = 'Success';
+      }
+    } catch (error) {
+      res = error.toString();
+    }
+    return res;
+  }
+
+  //Update Discount
+  Future<String> updateDiscount({
+    required uuid,
+    required int discount,
+  }) async {
+    String res = 'Some error occured.';
+    try {
+      if (uuid.isNotEmpty || discount != null) {
+        _firebaseFirestore.collection('discount').doc(uuid).update({
+          'discount': discount,
+        });
+        res = 'Success';
+      }
+    } catch (error) {
+      res = error.toString();
+    }
+    return res;
+  }
 }
