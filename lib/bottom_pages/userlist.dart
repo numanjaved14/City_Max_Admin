@@ -1,5 +1,4 @@
 import 'package:city_max_admin/appointments/apointment_details.dart';
-import 'package:city_max_admin/database/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -79,7 +78,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   // ),
                                   leading: Text(snap['date']),
                                   title: Text(
-                                    'Location: ${snap['loc'].toString().substring(0, 7)}',
+                                    'Location: ${snap['loc'].toString()}',
                                   ),
                                   subtitle: Text('Price: ${snap['price']} AED'),
                                 ),

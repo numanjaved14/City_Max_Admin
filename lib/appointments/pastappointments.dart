@@ -116,7 +116,7 @@ class _PastApointmentState extends State<PastApointment> {
                                             ),
                                           ),
                                     title: Text(
-                                      'Location: ${snap['loc'].toString().substring(0, 7)}',
+                                      'Location: ${snap['loc'].toString()}',
                                     ),
                                     subtitle:
                                         Text('Price: ${snap['price']} AED'),

@@ -76,7 +76,7 @@ class _CurrentAppointmentsState extends State<CurrentAppointments> {
                                   ),
                                   leading: Text(snap['date']),
                                   title: Text(
-                                    'Location: ${snap['loc'].toString().substring(0, 7)}',
+                                    'Location: ${snap['loc'].toString()}',
                                   ),
                                   subtitle: Text('Price: ${snap['price']} AED'),
                                 ),
