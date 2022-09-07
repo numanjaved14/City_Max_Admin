@@ -618,11 +618,8 @@ class _ServiceEditState extends State<ServiceEdit> {
     );
 
     if (res == 'Success') {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => MainScreen(),
-        ),
-      );
+      Navigator.push(
+          context, MaterialPageRoute(builder: (builder) => MainScreen()));
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(res)),
