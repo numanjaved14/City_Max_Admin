@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
 
-class ApointmentDetailsWidget extends StatelessWidget {
+class ApointmentDetailsWidget extends StatefulWidget {
   var snap;
   ApointmentDetailsWidget({
     Key? key,
     required this.snap,
   }) : super(key: key);
+
+  @override
+  State<ApointmentDetailsWidget> createState() =>
+      _ApointmentDetailsWidgetState();
+}
+
+class _ApointmentDetailsWidgetState extends State<ApointmentDetailsWidget> {
+  @override
+  void initState() {
+    debugPrint(widget.snap.toString());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,23 +26,23 @@ class ApointmentDetailsWidget extends StatelessWidget {
         title: Column(
           children: [
             Text(
-              'Service Type: ${snap['serviceType']}',
+              'Service Type: ${widget.snap['serviceType']}',
             ),
             Text(
-              'Service Category: ${snap['serviceCategory']}',
+              'Service Category: ${widget.snap['serivceCategory']}',
             ),
             Text(
-              'Service Sub Category: ${snap['seriveSubCat']}',
+              'Service Sub Category: ${widget.snap['serivceSubCat']}',
             ),
           ],
         ),
         subtitle: Column(
           children: [
             Text(
-              'Quantity: ${snap['quantity']}',
+              'Quantity: ${widget.snap['quantity']}',
             ),
             Text(
-              'Price: ${snap['price']}',
+              'Price: ${widget.snap['price']}',
             ),
           ],
         ),

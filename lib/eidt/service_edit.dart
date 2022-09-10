@@ -1,5 +1,6 @@
 import 'package:city_max_admin/database/database.dart';
 import 'package:city_max_admin/main/mainscreen.dart';
+import 'package:city_max_admin/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 
@@ -305,31 +306,46 @@ class _ServiceEditState extends State<ServiceEdit> {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.blue)),
                 margin: EdgeInsets.only(left: 15, right: 15),
                 child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: DropdownButtonFormField<String>(
-                    isExpanded: true,
-                    value: _make,
-                    items: serviceCategory
-                        .map((label) => DropdownMenuItem(
-                              child: Text(label.toString()),
-                              value: label,
-                            ))
-                        .toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _make = value;
-                        _model = null;
-                        print(value);
-                      });
-                    },
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  child: TextField(
+                    focusNode: AlwaysDisabledFocusNode(),
+                    enableInteractiveSelection: false,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      labelText: _make ?? 'Service Type',
+                    ),
                   ),
                 ),
               ),
+              // Container(
+              //   decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(20),
+              //       border: Border.all(color: Colors.blue)),
+              //   margin: EdgeInsets.only(left: 15, right: 15),
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(4.0),
+              //     child: DropdownButtonFormField<String>(
+              //       isExpanded: true,
+              //       value: _make,
+              //       items: serviceCategory
+              //           .map((label) => DropdownMenuItem(
+              //                 child: Text(label.toString()),
+              //                 value: label,
+              //               ))
+              //           .toList(),
+              //       onChanged: (value) {
+              //         setState(() {
+              //           _make = value;
+              //           _model = null;
+              //           print(value);
+              //         });
+              //       },
+              //     ),
+              //   ),
+              // ),
               SizedBox(
                 height: 20,
               ),
@@ -347,30 +363,45 @@ class _ServiceEditState extends State<ServiceEdit> {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.blue)),
                 margin: EdgeInsets.only(left: 15, right: 15),
                 child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: DropdownButtonFormField<String>(
-                    isExpanded: true,
-                    value: _model,
-                    items: _selectModel(_make)
-                        .map((label) => DropdownMenuItem(
-                              child: Text(label.toString()),
-                              value: label,
-                            ))
-                        .toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _model = value;
-                        print(value);
-                      });
-                    },
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  child: TextField(
+                    focusNode: AlwaysDisabledFocusNode(),
+                    enableInteractiveSelection: false,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      labelText: _model ?? 'Service Type',
+                    ),
                   ),
                 ),
               ),
+              // Container(
+              //   decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(20),
+              //       border: Border.all(color: Colors.blue)),
+              //   margin: EdgeInsets.only(left: 15, right: 15),
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(4.0),
+              //     child: DropdownButtonFormField<String>(
+              //       isExpanded: true,
+              //       value: _model,
+              //       items: _selectModel(_make)
+              //           .map((label) => DropdownMenuItem(
+              //                 child: Text(label.toString()),
+              //                 value: label,
+              //               ))
+              //           .toList(),
+              //       onChanged: (value) {
+              //         setState(() {
+              //           _model = value;
+              //           print(value);
+              //         });
+              //       },
+              //     ),
+              //   ),
+              // ),
               SizedBox(
                 height: 20,
               ),
@@ -388,30 +419,45 @@ class _ServiceEditState extends State<ServiceEdit> {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.blue)),
                 margin: EdgeInsets.only(left: 15, right: 15),
                 child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: DropdownButtonFormField<String>(
-                    isExpanded: true,
-                    value: _subCat,
-                    items: _selectSubModel(_model)
-                        .map((label) => DropdownMenuItem(
-                              child: Text(label.toString()),
-                              value: label,
-                            ))
-                        .toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _subCat = value;
-                        print(value);
-                      });
-                    },
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  child: TextField(
+                    focusNode: AlwaysDisabledFocusNode(),
+                    enableInteractiveSelection: false,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      labelText: _subCat ?? 'Service Type',
+                    ),
                   ),
                 ),
               ),
+              // Container(
+              //   decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(20),
+              //       border: Border.all(color: Colors.blue)),
+              //   margin: EdgeInsets.only(left: 15, right: 15),
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(4.0),
+              //     child: DropdownButtonFormField<String>(
+              //       isExpanded: true,
+              //       value: _subCat,
+              //       items: _selectSubModel(_model)
+              //           .map((label) => DropdownMenuItem(
+              //                 child: Text(label.toString()),
+              //                 value: label,
+              //               ))
+              //           .toList(),
+              //       onChanged: (value) {
+              //         setState(() {
+              //           _subCat = value;
+              //           print(value);
+              //         });
+              //       },
+              //     ),
+              //   ),
+              // ),
               SizedBox(
                 height: 20,
               ),
@@ -552,6 +598,8 @@ class _ServiceEditState extends State<ServiceEdit> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                   child: TextField(
+                    focusNode: AlwaysDisabledFocusNode(),
+                    enableInteractiveSelection: false,
                     controller: vatController,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -618,8 +666,11 @@ class _ServiceEditState extends State<ServiceEdit> {
     );
 
     if (res == 'Success') {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (builder) => MainScreen()));
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => MainScreen(),
+        ),
+      );
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(res)),
