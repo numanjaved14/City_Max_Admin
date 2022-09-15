@@ -293,7 +293,36 @@ class _ApointmentDetailsState extends State<ApointmentDetails> {
                     Container(
                       margin: const EdgeInsets.only(left: 20),
                       child: Text(
-                        widget.snap['userDescription'] ?? '-',
+                        widget.snap['userDescription'] == null ||
+                                widget.snap['userDescription'] == ''
+                            ? 'No Description'
+                            : widget.snap['userDescription'],
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 15),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 20),
+                      child: const Text(
+                        'Payed Via',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 20),
+                      child: Text(
+                        widget.snap['payVia'] ?? 'No Data Found',
                         style:
                             const TextStyle(color: Colors.black, fontSize: 15),
                         textAlign: TextAlign.start,

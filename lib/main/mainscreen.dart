@@ -18,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
   PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
   int currentTab = 0; // to keep track of active tab index
-  final List<Widget> screens = [
+  final List<Widget> screens = const [
     MyHomePage(),
     ServicePage(),
     UserAppointmentPage(),
